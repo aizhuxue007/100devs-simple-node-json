@@ -1,13 +1,14 @@
-document.querySelector('#clickMe').addEventListener('click', makeReq)
+document.querySelector('#clickMe').addEventListener('click', renderPizza)
 
-async function makeReq(){
+const pizzaMenu = {
+  'cheese': "/assets/cheese-pizza.png",
+  'pepperoni': "/assets/pepperoni-pizza.jpg",
+  'cbr': "/assets/cb-ranch.png"
+}
 
-  const userName = document.querySelector("#userName").value;
-  const res = await fetch(`/api?student=${userName}`)
-  const data = await res.json()
-
-  console.log(data);
-  document.querySelector("#personName").textContent = data.name
-  document.querySelector("#personStatus").textContent = data.status
-  document.querySelector("#personOccupation").textContent = data.currentOccupation
+async function renderPizza() {
+  const pizzaRequest = document.querySelector("#pizza-input").value;
+  const req = fetch(`${pizzaMenu[pizzaRequest]}`);
+  
+  document.querySelector("#pizza").src = pizzaMenu[pizzaRequest]
 }
